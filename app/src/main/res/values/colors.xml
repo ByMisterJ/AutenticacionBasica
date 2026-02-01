@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Biometric Authentication Colors -->
+    <color name="auth_success">#4CAF50</color>
+    <color name="auth_error">#F44336</color>
+    <color name="auth_warning">#FF9800</color>
+    <color name="auth_failed">#FF5722</color>
 </resources>

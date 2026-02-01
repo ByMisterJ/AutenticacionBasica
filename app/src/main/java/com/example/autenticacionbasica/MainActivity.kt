@@ -1,6 +1,5 @@
 package com.example.autenticacionbasica
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -56,37 +55,37 @@ class MainActivity : AppCompatActivity() {
                 // Biometric is available, enable the button
                 authenticateButton.isEnabled = true
                 updateStatus(getString(R.string.auth_status_pending))
-                showMessage("", Color.TRANSPARENT)
+                clearMessage()
             }
             BiometricAuthManager.BiometricAvailability.NO_HARDWARE -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_no_hardware), Color.RED)
+                showMessage(getString(R.string.biometric_no_hardware), getColor(R.color.auth_error))
             }
             BiometricAuthManager.BiometricAvailability.HW_UNAVAILABLE -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_hw_unavailable), Color.RED)
+                showMessage(getString(R.string.biometric_hw_unavailable), getColor(R.color.auth_error))
             }
             BiometricAuthManager.BiometricAvailability.NONE_ENROLLED -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_none_enrolled), Color.RED)
+                showMessage(getString(R.string.biometric_none_enrolled), getColor(R.color.auth_error))
             }
             BiometricAuthManager.BiometricAvailability.SECURITY_UPDATE_REQUIRED -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_security_update_required), Color.RED)
+                showMessage(getString(R.string.biometric_security_update_required), getColor(R.color.auth_error))
             }
             BiometricAuthManager.BiometricAvailability.UNSUPPORTED -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_unsupported), Color.RED)
+                showMessage(getString(R.string.biometric_unsupported), getColor(R.color.auth_error))
             }
             BiometricAuthManager.BiometricAvailability.STATUS_UNKNOWN -> {
                 authenticateButton.isEnabled = false
                 updateStatus(getString(R.string.biometric_not_available))
-                showMessage(getString(R.string.biometric_status_unknown), Color.RED)
+                showMessage(getString(R.string.biometric_status_unknown), getColor(R.color.auth_error))
             }
         }
     }
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             callback = object : BiometricAuthManager.AuthenticationCallback {
                 override fun onAuthenticationSuccess() {
                     updateStatus(getString(R.string.auth_success))
-                    showMessage(getString(R.string.auth_success_message), Color.parseColor("#4CAF50"))
+                    showMessage(getString(R.string.auth_success_message), getColor(R.color.auth_success))
                 }
                 
                 override fun onAuthenticationError(errorCode: Int, errorMessage: String) {
@@ -111,23 +110,23 @@ class MainActivity : AppCompatActivity() {
                         BiometricPrompt.ERROR_USER_CANCELED,
                         BiometricPrompt.ERROR_NEGATIVE_BUTTON -> {
                             updateStatus(getString(R.string.auth_cancelled))
-                            showMessage(errorMessage, Color.parseColor("#FF9800"))
+                            showMessage(errorMessage, getColor(R.color.auth_warning))
                         }
                         BiometricPrompt.ERROR_LOCKOUT,
                         BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> {
                             updateStatus(getString(R.string.auth_error))
-                            showMessage(errorMessage, Color.RED)
+                            showMessage(errorMessage, getColor(R.color.auth_error))
                         }
                         else -> {
                             updateStatus(getString(R.string.auth_error))
-                            showMessage(errorMessage, Color.RED)
+                            showMessage(errorMessage, getColor(R.color.auth_error))
                         }
                     }
                 }
                 
                 override fun onAuthenticationFailed() {
                     updateStatus(getString(R.string.auth_failed))
-                    showMessage(getString(R.string.auth_failed_message), Color.parseColor("#FF5722"))
+                    showMessage(getString(R.string.auth_failed_message), getColor(R.color.auth_failed))
                 }
             }
         )
@@ -141,15 +140,19 @@ class MainActivity : AppCompatActivity() {
     }
     
     /**
+     * Clear the message TextView
+     */
+    private fun clearMessage() {
+        messageTextView.visibility = View.GONE
+        messageTextView.text = ""
+    }
+    
+    /**
      * Show message with specified color
      */
     private fun showMessage(message: String, color: Int) {
-        if (message.isEmpty()) {
-            messageTextView.visibility = View.GONE
-        } else {
-            messageTextView.visibility = View.VISIBLE
-            messageTextView.text = message
-            messageTextView.setTextColor(color)
-        }
+        messageTextView.visibility = View.VISIBLE
+        messageTextView.text = message
+        messageTextView.setTextColor(color)
     }
 }
