@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">AutenticacionBasica</string>
+    
+    <!-- Biometric Authentication Strings -->
+    <string name="biometric_title">Autenticación Biométrica</string>
+    <string name="biometric_subtitle">Verifica tu identidad</string>
+    <string name="biometric_description">Coloca tu dedo en el sensor de huella dactilar</string>
+    <string name="biometric_negative_button">Cancelar</string>
+    
+    <!-- UI Strings -->
+    <string name="welcome_message">Bienvenido a Autenticación Básica</string>
+    <string name="auth_status_label">Estado de Autenticación:</string>
+    <string name="auth_status_pending">Pendiente</string>
+    <string name="auth_button_text">Autenticar con Huella Dactilar</string>
+    
+    <!-- Success Messages -->
+    <string name="auth_success">✓ Autenticación exitosa</string>
+    <string name="auth_success_message">Has sido autenticado correctamente</string>
+    
+    <!-- Error Messages -->
+    <string name="auth_failed">✗ Autenticación fallida</string>
+    <string name="auth_failed_message">La huella dactilar no fue reconocida. Intenta nuevamente.</string>
+    <string name="auth_error">Error de autenticación</string>
+    <string name="auth_cancelled">Autenticación cancelada</string>
+    
+    <!-- Device Not Supported Messages -->
+    <string name="biometric_not_available">Biométricos no disponibles</string>
+    <string name="biometric_no_hardware">Este dispositivo no tiene hardware biométrico</string>
+    <string name="biometric_hw_unavailable">El hardware biométrico no está disponible actualmente</string>
+    <string name="biometric_none_enrolled">No hay huellas dactilares registradas. Por favor, registra al menos una huella en la configuración del dispositivo.</string>
+    <string name="biometric_security_update_required">Se requiere una actualización de seguridad</string>
+    <string name="biometric_unsupported">La autenticación biométrica no es compatible con este dispositivo</string>
+    <string name="biometric_status_unknown">Estado de biométricos desconocido</string>
 </resources>

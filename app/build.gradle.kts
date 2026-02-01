@@ -36,6 +36,16 @@ android {
 }
 
 dependencies {
+    // Credential Manager
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    
+    // Biometric
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    
+    // Coroutines para operaciones asíncronas
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
