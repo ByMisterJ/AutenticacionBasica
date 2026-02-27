@@ -22,32 +22,30 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         
-        // Setup window insets
+        // Configurar edge-to-edge para manejar correctamente los insets del sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
         
-        // Initialize views
+        // Views
         statusTextView = findViewById(R.id.statusTextView)
         messageTextView = findViewById(R.id.messageTextView)
         authenticateButton = findViewById(R.id.authenticateButton)
         
-        // Initialize biometric manager
+        // biometric manager
         biometricAuthManager = BiometricAuthManager(this)
-        
-        // Check biometric availability on startup
+
         checkBiometricAvailability()
-        
-        // Setup button click listener
+
         authenticateButton.setOnClickListener {
             startBiometricAuthentication()
         }
     }
     
     /**
-     * Check if biometric authentication is available on this device
+     * Comprobar la disponibilidad de la autenticación biométrica y actualizar la UI en consecuencia
      */
     private fun checkBiometricAvailability() {
         when (biometricAuthManager.isBiometricAvailable()) {
@@ -91,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     /**
-     * Start the biometric authentication process
+     * Empiezar el proceso de autenticación biométrica mostrando el prompt correspondiente
      */
     private fun startBiometricAuthentication() {
         biometricAuthManager.authenticate(
@@ -133,14 +131,14 @@ class MainActivity : AppCompatActivity() {
     }
     
     /**
-     * Update the status TextView
+     * Actualizar el TextView de estado con el mensaje proporcionado
      */
     private fun updateStatus(status: String) {
         statusTextView.text = status
     }
     
     /**
-     * Clear the message TextView
+     * Limpiar el mensaje de error o éxito y ocultar el TextView correspondiente
      */
     private fun clearMessage() {
         messageTextView.visibility = View.GONE
@@ -148,7 +146,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     /**
-     * Show message with specified color
+     * Mostrar un mensaje de error o éxito con el color especificado y hacer visible el TextView correspondiente
      */
     private fun showMessage(message: String, color: Int) {
         messageTextView.visibility = View.VISIBLE
